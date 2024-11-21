@@ -7,7 +7,7 @@ const img_with = 1024
 const aspect_ratio = 16.0 / 9.0;
 const img_height = Math.floor(img_with / aspect_ratio)
 const focal_length = vec.length(vec.minusVec(lookfrom, lookat));
-const vfov = 200;
+const vfov = 96;
 
 const vup = vec.of(0, 1, 0);     // Camera-relative "up" direction
 const w = vec.unit_vector(vec.minusVec(lookfrom, lookat));
@@ -23,7 +23,8 @@ const calcViewPortHight = () => {
     const theta = degrees_to_radians(vfov);
     const h = Math.tan(theta / 2);
 
-    return 2 * h * focal_length;
+    // return 2 * h * focal_length;
+    return 2
 }
 
 const viewport_height = calcViewPortHight()
