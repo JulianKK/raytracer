@@ -13,7 +13,7 @@ const vup = vec.of(0, 1, 0);     // Camera-relative "up" direction
 const w = vec.unit_vector(vec.minusVec(lookfrom, lookat));
 const u = vec.unit_vector(vec.cross(vup, w));
 const v = vec.cross(w, u);
-const camera_center = lookfrom;
+const camera_center = vec.of(0, 0, 3);
 
 const degrees_to_radians = (degrees) => {
     return degrees * Math.PI / 180.0;
@@ -29,13 +29,14 @@ const calcViewPortHight = () => {
 
 const viewport_height = calcViewPortHight()
 const viewport_width = viewport_height * img_with / img_height;
-const viewport_u = vec.multiplyNum(u, viewport_width); 
-const viewport_v = vec.multiplyNum(vec.multiplyNum(v, -1), viewport_height)
+// const viewport_u = vec.multiplyNum(u, viewport_width); 
+const viewport_u = vec.of(viewport_width, 0, 0); 
+const viewport_v = vec.of(0, -viewport_height, 0)
 const pixel_delta_u = vec.devideNum(viewport_u, img_with)
 const pixel_delta_v = vec.devideNum(viewport_v, img_height)
 
 const calcviewport_upper_left = () => {
-    const centerMinDirection = vec.minusVec(camera_center, vec.multiplyNum(v, focal_length))
+    const centerMinDirection = vec.minusVec(camera_center, vec.of(0, 0, focal_length))
     const viewUHalthU = vec.devideNum(viewport_u, 2)
     const viewUHalthv = vec.devideNum(viewport_v, 2)
     const centerMinViewPortu = vec.minusVec(centerMinDirection, viewUHalthU)
